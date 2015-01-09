@@ -1,7 +1,7 @@
 <?php
 /**
  * @package 			Ingress Statistics Builder
- * @version 			1.0.1
+ * @version 			1.1.0
  * @author 			Avtandil Kikabidze
  * @link 				http://long.ge
  * @copyright 		Copyright (c) 2008-2015, Avtandil Kikabidze aka LONGMAN (akalongman@gmail.com)
@@ -508,11 +508,11 @@ class Ingress
 				<footer>
 					<div class="pull-right" style="text-align:right;">
 						<span style="font-size:18px">
-							Created by <b><a href="https://plus.google.com/u/0/+AvtandilKikabidze" target="_blank">LONGMAN</a></b> [ENL]
+							Created by <b><a style="color:#2bed1b;" href="https://plus.google.com/u/0/+AvtandilKikabidze" target="_blank">LONGMAN</a></b> [ENL]
 						</span>
 						<br />
 						<span style="font-size:14px">
-							Original idea <a href="http://gplus.to/sendelufa" target="_blank">Sendel</a> [ENL]
+							Original idea <a style="color:#2bed1b;" href="http://gplus.to/sendelufa" target="_blank">Sendel</a> [ENL]
 						</span>
 					</div>
 				</footer>
@@ -538,6 +538,5 @@ class Ingress
 		</html>
 		<?php
 	}
-
 
 }

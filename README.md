@@ -14,6 +14,11 @@ CYCLE_NAME,ENL_MU(k),RES_MU(k),ENL_TOP_PLAYER,RES_TOP_PLAYER
 Small example:
 2014.03,59.4,16.2,LONGMAN [L11],bizarre [L10]
 
+If no data about any player you can left empty:
+2014.03,59.4,16.2,,bizarre [L10]
+
+If MUs is under 1k you must specify amount with decimals under 1:
+2014.03,0.1,16.2,LONGMAN [L11],bizarre [L10]
 
 ```php
 	// include lib file
