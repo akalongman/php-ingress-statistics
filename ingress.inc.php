@@ -1,7 +1,7 @@
 <?php
 /**
  * @package 			Ingress Statistics Builder
- * @version 			1.0.0
+ * @version 			1.0.1
  * @author 			Avtandil Kikabidze
  * @link 				http://long.ge
  * @copyright 		Copyright (c) 2008-2015, Avtandil Kikabidze aka LONGMAN (akalongman@gmail.com)
@@ -106,14 +106,20 @@ class Ingress
 			$enl_player = trim($str[3]);
 			$res_player = trim($str[4]);
 
-			$enl_players[] = $enl_player;
-			$res_players[] = $res_player;
+			if (!empty($enl_player)) {
+				$enl_players[] = $enl_player;
+				$top_players[] = $enl_player;
+				$players[$enl_player] = 'ENL';
+			}
 
-			$players[$enl_player] = 'ENL';
-			$players[$res_player] = 'RES';
+			if (!empty($res_player)) {
+				$res_players[] = $res_player;
+				$players[$res_player] = 'RES';
+				$top_players[] = $res_player;
+			}
 
-			$top_players[] = $enl_player;
-			$top_players[] = $res_player;
+
+
 
 			$js_categories[] = $cicle_name;
 			$js_enl_mus[] = "{y:".$enl_mu.", player:'".strtok($enl_player, ' ')."', faction: 'ENL', playerlvl: '".$enl_player."'}";
