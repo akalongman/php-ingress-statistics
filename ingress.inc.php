@@ -1,7 +1,7 @@
 <?php
 /**
  * @package 			Ingress Statistics Builder
- * @version 			1.1.0
+ * @version 			1.2.0
  * @author 			Avtandil Kikabidze
  * @link 				http://long.ge
  * @copyright 		Copyright (c) 2008-2015, Avtandil Kikabidze aka LONGMAN (akalongman@gmail.com)
@@ -25,6 +25,15 @@ class Ingress
 	// Google Analytics ID
 	protected $analytics_id;
 
+	// Version
+	private $version = '1.2.0';
+
+	// Chart options
+	private $chart_options = array(
+		'animation.duration' => 1500,
+		'animation.easing' => 'swing',
+		);
+
 
 	/**
 	 * Contructor function
@@ -47,6 +56,9 @@ class Ingress
 		}
 		if (isset($config['analytics'])) {
 			$this->analytics_id = $config['analytics'];
+		}
+		if (isset($config['chart_options'])) {
+			$this->chart_options = $config['chart_options'];
 		}
 
 	}
@@ -99,6 +111,11 @@ class Ingress
 		$top_players = array();
 		$cycles = 0;
 		foreach($this->data as $i=>$item) {
+			$item = trim($item);
+			if (empty($item)) {
+				continue;
+			}
+
 			$str = explode(',', $item);
 			$cicle_name = trim($str[0]);
 			$enl_mu = trim($str[1]);
@@ -167,8 +184,8 @@ class Ingress
 		<head>
 			<meta charset="utf-8" />
 			<title>Results for cell <?php echo $this->cell ?> "<?php echo $this->cellname ?>" of <?php echo $this->year ?> year.</title>
-			<link rel="icon" href="http://ingress.ge/favicon.ico"/>
-			<link rel="shortcut icon" href="http://ingress.ge/favicon.ico" />
+			<link rel="icon" href="http://ingress.com/favicon.ico"/>
+			<link rel="shortcut icon" href="http://ingress.com/favicon.ico" />
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<meta name="description" content="Statistics for cell <?php echo $this->cell?> of <?php echo $this->year ?> year" />
@@ -176,6 +193,9 @@ class Ingress
 			<meta name="author" content="LONGMAN" />
 
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+			<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+			<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
 			<!-- Latest compiled and minified CSS -->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -297,6 +317,10 @@ class Ingress
 								borderWidth: 0
 							},
 							series: {
+								animation: {
+									duration: <?php echo $this->chart_options['animation.duration']?>,
+									easing: '<?php echo $this->chart_options["animation.easing"]?>'
+								},
 								dataLabels: {
 									enabled: true,
 									//align: 'right',
@@ -506,13 +530,16 @@ class Ingress
 				</div>
 
 				<footer>
+					<div class="pull-left" style="text-align:left;margin-top: 24px;">
+						Statistics generated via <a href="https://github.com/akalongman/php-ingress-statistics" target="_blank">Ingress Statistics Generator v<?php echo $this->version?></a>
+					</div>
 					<div class="pull-right" style="text-align:right;">
 						<span style="font-size:18px">
-							Created by <b><a style="color:#2bed1b;" href="https://plus.google.com/u/0/+AvtandilKikabidze" target="_blank">LONGMAN</a></b> [ENL]
+							Created by <b><a style="color:#2bed1b;" href="https://plus.google.com/u/0/+AvtandilKikabidze" target="_blank">LONGMAN</a></b>
 						</span>
 						<br />
 						<span style="font-size:14px">
-							Original idea <a style="color:#2bed1b;" href="http://gplus.to/sendelufa" target="_blank">Sendel</a> [ENL]
+							Original idea <a style="color:#2bed1b;" href="http://gplus.to/sendelufa" target="_blank">Sendel</a>
 						</span>
 					</div>
 				</footer>

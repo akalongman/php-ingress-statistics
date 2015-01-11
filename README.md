@@ -25,7 +25,6 @@ If MUs is under 1k you must specify amount with decimals under 1:
 	require('ingress.inc.php');
 
 	try {
-		// initialize class with custom parameters
 
 		// Possible parameters
 		// year - Statistics year for titles
@@ -33,10 +32,17 @@ If MUs is under 1k you must specify amount with decimals under 1:
 		// cellname - Human readable cell name
 		// analytics - Google analytics id (if you want track page views)
 
+		// chart_options - Chart Options:
+		//			 animation.duration - Duration in milliseconds (default is 1500)
+		//			 animation.easing - Easing (default is 'swing'. More easings you can see at http://api.jqueryui.com/easings)
+		$chart_options = array('animation.duration'=>1500, 'animation.easing'=>'easeOutBounce');
+
+
+		// initialize class with custom parameters
 		$ingress = new Ingress(array('year'=>2014, 'cell'=>'NR02-BRAVO-02', 'cellname'=>'Tbilisi - Georgia'));
 
 		// load csv file
-		$ingress->loadCSV('2014.csv');
+		$ingress->loadCSV('example.csv');
 
 		// render generated HTML
 		$ingress->render();
